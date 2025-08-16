@@ -9,6 +9,7 @@
 #include <cairo.h>
 #include <cairo-xlib.h>
 #include <math.h>
+#include <unistd.h>
 
 int max_len(const char* options[], int num_options)
 {
@@ -131,7 +132,12 @@ void execute_command(int clicked, const char* options[])
 	}
 	if (clicked == 1)
 	{
-		system("systemctl suspend");
+		if (fork() == 0)
+		{
+			system("systemctl suspend");
+		}
+
+		exit(0);
 	}
 	if (clicked == 2)
 	{
