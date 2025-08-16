@@ -108,17 +108,45 @@ void draw_options(Display* display, Window w, XftDraw* xftDraw, XftFont* font,
         }
 
         XftColor* draw_color = (i == hovered) ? hover_color : color;
-        XftDrawStringUtf8(xftDraw, draw_color, font,
-            text_x, text_y,
-            (XftChar8*)options[i], strlen(options[i]));
+        XftDrawStringUtf8(
+			xftDraw, 
+			draw_color, 
+			font,
+            text_x, 
+			text_y,
+            (XftChar8*)options[i], 
+			strlen(options[i]));
     }
 }
 
+void execute_command(int clicked, const char* options[])
+{
+	printf("Clicked: %s\n", options[clicked]);
+	printf("%d\n", clicked);
+	fflush(stdout);
+
+	if (clicked == 0)
+	{
+		system("i3-msg exit");
+	}
+	if (clicked == 1)
+	{
+		system("systemctl suspend");
+	}
+	if (clicked == 2)
+	{
+		system("systemctl reboot");
+	}
+	if (clicked == 3)
+	{
+		system("systemctl poweroff");
+	}
+}
 
 
 int main()
 {
-	const char* options[] = { "Logout", "Suspend", "Reboot", "Shutdown" };
+	const char* options[] = { "   Logout", "   Suspend", "   Reboot", "   Shutdown" };
 	int num_options = 4;
 	int start_y = 100;
 	int spacing = 90;
@@ -172,7 +200,8 @@ int main()
 	XftDraw* xftDraw = NULL;
 	XftFont* font = XftFontOpenName(
 		display,
-		DefaultScreen(display), "Sans-26"
+		DefaultScreen(display), 
+		"FiraCode Nerd Font-26"
 	);
 	XftColor color;
 	Colormap colormap = DefaultColormap(display, DefaultScreen(display));
@@ -214,8 +243,7 @@ int main()
 
 			if (clicked != -1)
 			{
-				printf("Clicked: %s\n", options[clicked]);
-				fflush(stdout);
+				execute_command(clicked, options);
 			}
 		}
 
@@ -223,7 +251,8 @@ int main()
 		{
 			int x = event.xmotion.x;
 			int y = event.xmotion.y;
-			int new_hovered = get_clicked_option(x, 
+			int new_hovered = get_clicked_option(
+								x, 
 								y,
 								start_y, 
 								spacing, 
@@ -261,7 +290,9 @@ int main()
 				if (hovered != -1)
 				{
 					printf("Selected: %s\n", options[hovered]);
+					printf("Am I here?");
 					fflush(stdout);
+					execute_command(hovered, options);
 				}
 			}
 		}
