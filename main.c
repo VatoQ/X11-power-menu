@@ -301,6 +301,12 @@ int main()
 					execute_command(hovered, options);
 				}
 			}
+
+			else if (key == XK_Escape)
+			{
+				printf("Exit on User input");
+				exit(0);
+			}
 		}
 	}
 	XftFontClose(display, font);
