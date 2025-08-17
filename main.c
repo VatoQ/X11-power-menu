@@ -122,8 +122,8 @@ void draw_options(Display* display, Window w, XftDraw* xftDraw, XftFont* font,
 
 void execute_command(int clicked, const char* options[])
 {
-	printf("Clicked: %s\n", options[clicked]);
-	printf("%d\n", clicked);
+	//printf("Clicked: %s\n", options[clicked]);
+	//printf("%d\n", clicked);
 	fflush(stdout);
 
 	if (clicked == 0)
@@ -295,8 +295,8 @@ int main()
 			{
 				if (hovered != -1)
 				{
-					printf("Selected: %s\n", options[hovered]);
-					printf("Am I here?");
+					//printf("Selected: %s\n", options[hovered]);
+					//printf("Am I here?");
 					fflush(stdout);
 					execute_command(hovered, options);
 				}
@@ -304,7 +304,7 @@ int main()
 
 			else if (key == XK_Escape)
 			{
-				printf("Exit on User input");
+				//printf("Exit on User input");
 				exit(0);
 			}
 		}
