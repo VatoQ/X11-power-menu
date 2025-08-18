@@ -84,19 +84,11 @@ void draw_options(Display* display, Window w, XftDraw* xftDraw, XftFont* font,
 
         if (i == hovered)
         {
-            //XSetForeground(display, DefaultGC(display, 0), hover_bg->pixel);
-            //XFillRectangle(display, w, DefaultGC(display, 0),
-            //    text_x - padding_x,
-            //    text_y - font->ascent - padding_y,
-            //    text_width + 2 * padding_x,
-            //    text_height + 2 * padding_y);
-
 			double rect_x = text_x - padding_x;
 			double rect_y = text_y - font->ascent - padding_y;
 			double rect_width = text_width +  2 * padding_x;
 			double rect_height = text_height + 2 * padding_y;
 			double corner_radius = 20.0;
-
 
 			cairo_set_source_rgb(cr, 
 						hover_bg->red / 65535.0,
@@ -122,10 +114,6 @@ void draw_options(Display* display, Window w, XftDraw* xftDraw, XftFont* font,
 
 void execute_command(int clicked, const char* options[])
 {
-	//printf("Clicked: %s\n", options[clicked]);
-	//printf("%d\n", clicked);
-	fflush(stdout);
-
 	if (clicked == 0)
 	{
 		system("i3-msg exit");
@@ -221,8 +209,6 @@ int main()
 
 
 
-
-
 	xftDraw = XftDrawCreate(
 		display, 
 		w, 
@@ -295,16 +281,12 @@ int main()
 			{
 				if (hovered != -1)
 				{
-					//printf("Selected: %s\n", options[hovered]);
-					//printf("Am I here?");
-					fflush(stdout);
 					execute_command(hovered, options);
 				}
 			}
 
 			else if (key == XK_Escape)
 			{
-				//printf("Exit on User input");
 				exit(0);
 			}
 		}
