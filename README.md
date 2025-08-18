@@ -10,7 +10,7 @@ A simple window with the options
 ## Installation
 
 The script `install.sh` compiles `main.c` and copies the executable 
-to `~/.config/i3blocks/scripts`. Alternatively you can download the
+to `~/.config/polybar/scripts`. Alternatively you can download the
 latest release and paste the executable wherever you'd like.
 
 
